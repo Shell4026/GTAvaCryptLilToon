@@ -1,5 +1,8 @@
 Convert to lilToon and Encrypt UV instead of mesh.
 
+First, you must have a lilToon installed.
+https://github.com/lilxyzw/lilToon
+
 #
 
 The official root repository for this project is here https://github.com/rygo6/GTAvaCrypt. Be sure you are downloading it only from there.

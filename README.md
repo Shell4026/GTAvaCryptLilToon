@@ -1,4 +1,4 @@
-# GeoTetra AvaCrypt V2
+#
 
 The official root repository for this project is here https://github.com/rygo6/GTAvaCrypt. Be sure you are downloading it only from there.
 

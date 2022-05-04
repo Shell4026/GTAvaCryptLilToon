@@ -1,0 +1,46 @@
+
+        //----------------------------------------------------------------------------------------------------------------------
+        // Custom Properties
+        //_CustomVariable ("Custom Variable", Float) = 0
+		
+        _EnableAvaCrypt ("enable", float) = 1
+
+        _BitKey0 ("bitkey0", float) = 0
+        _BitKey1 ("bitkey1", float) = 0
+        _BitKey2 ("bitkey2", float) = 0
+        _BitKey3 ("bitkey3", float) = 0
+
+        _BitKey4 ("bitkey4", float) = 0
+        _BitKey5 ("bitkey5", float) = 0
+        _BitKey6 ("bitkey6", float) = 0
+        _BitKey7 ("bitkey7", float) = 0
+
+        _BitKey8 ("bitkey8", float) = 0
+        _BitKey9 ("bitkey9", float) = 0
+        _BitKey10 ("bitkey10", float) = 0
+        _BitKey11 ("bitkey11", float) = 0
+
+        _BitKey12 ("bitkey12", float) = 0
+        _BitKey13 ("bitkey13", float) = 0
+        _BitKey14 ("bitkey14", float) = 0
+        _BitKey15 ("bitkey15", float) = 0
+
+        _BitKey16 ("bitkey16", float) = 0
+        _BitKey17 ("bitkey17", float) = 0
+        _BitKey18 ("bitkey18", float) = 0
+        _BitKey19 ("bitkey19", float) = 0
+
+        _BitKey20 ("bitkey20", float) = 0
+        _BitKey21 ("bitkey21", float) = 0
+        _BitKey22 ("bitkey22", float) = 0
+        _BitKey23 ("bitkey23", float) = 0
+
+        _BitKey24 ("bitkey24", float) = 0
+        _BitKey25 ("bitkey25", float) = 0
+        _BitKey26 ("bitkey26", float) = 0
+        _BitKey27 ("bitkey27", float) = 0
+
+        _BitKey28 ("bitkey28", float) = 0
+        _BitKey29 ("bitkey29", float) = 0
+        _BitKey30 ("bitkey30", float) = 0
+        _BitKey31 ("bitkey31", float) = 0

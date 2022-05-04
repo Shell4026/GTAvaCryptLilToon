@@ -64,7 +64,6 @@ float comKey6 = cos(decodeKey7 - decodeKey6) * 0.9228159 * sin(decodeKey4 - deco
 float comKey7 = cos(decodeKey7 + decodeKey4) * 1.319906 * cos(decodeKey2 - decodeKey5);
   
     // AvaCrypt Randomly Generated End
-    uv.xy *= 10.0f;
     uv.x -= (uv0.x * comKey0);
     uv.y -= (uv0.y * comKey1);
     uv.x -= (uv0.x * comKey2);

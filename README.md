@@ -1,4 +1,4 @@
-Convert to lilToon and Encrypt UV instead of mesh.
+Convert to lilToon.
 
 First, you must have a lilToon installed.
 https://github.com/lilxyzw/lilToon

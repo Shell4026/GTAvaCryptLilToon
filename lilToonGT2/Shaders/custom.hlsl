@@ -9,7 +9,7 @@
 
 // Add vertex shader input
 #define LIL_REQUIRE_APP_POSITION
-#define LIL_REQUIRE_APP_TEXCOORD0
+//#define LIL_REQUIRE_APP_TEXCOORD0
 //#define LIL_REQUIRE_APP_TEXCOORD1
 //#define LIL_REQUIRE_APP_TEXCOORD2
 //#define LIL_REQUIRE_APP_TEXCOORD3
@@ -38,7 +38,7 @@
 
 // Inserting a process into the vertex shader
 #define LIL_CUSTOM_VERTEX_OS \
-    input.uv0 = modelDecode(input.uv0, input.normalOS, input.uv6, input.uv7);
+    positionOS = modelDecode(positionOS, input.normalOS, input.uv6, input.uv7);
 //#define LIL_CUSTOM_VERTEX_WS
 
 // Inserting a process into pixel shader

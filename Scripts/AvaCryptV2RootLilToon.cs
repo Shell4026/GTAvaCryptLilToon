@@ -18,10 +18,10 @@ namespace GeoTetra.GTAvaCrypt
 {
     public class AvaCryptV2RootLilToon : MonoBehaviour
     {
-        [Header("Set high enough so your encrypted mesh is visuall. Default = 1")]
-        [Range(0.01f, 10f)]
+        [Header("Set high enough so your encrypted mesh is visuall. Default = 0.1")]
+        [Range(0.01f, 1f)]
         [SerializeField] 
-        float _distortRatio = 1f;
+        float _distortRatio = 0.1f;
 
         [Header("Ensure this is pointing to your LocalAvatarData folder!")]
         [SerializeField] 

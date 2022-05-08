@@ -96,11 +96,10 @@ namespace GeoTetra.GTAvaCrypt
             
             int divideCount = keys.Length / DivideCount;
 
-            //Vector3[] newVertices = mesh.vertices;
-            Vector2[] newUvs = mesh.uv;
+            Vector3[] newVertices = mesh.vertices;
             Vector3[] normals = mesh.normals;
-            Vector2[] uv7Offsets = new Vector2[newUvs.Length];
-            Vector2[] uv8Offsets = new Vector2[newUvs.Length];
+            Vector2[] uv7Offsets = new Vector2[newVertices.Length];
+            Vector2[] uv8Offsets = new Vector2[newVertices.Length];
 
             float[] decodeKeys = new float[divideCount];
 
@@ -158,7 +157,7 @@ namespace GeoTetra.GTAvaCrypt
             float minRange = maxDistance * -distortRatio;
             const float maxRange = 0;
 
-            for (var v = 0; v < newUvs.Length; v++)
+            for (var v = 0; v < newVertices.Length; v++)
             {
                 uv7Offsets[v].x = Random.Range(minRange, maxRange);
                 uv7Offsets[v].y = Random.Range(minRange, maxRange);
@@ -166,26 +165,17 @@ namespace GeoTetra.GTAvaCrypt
                 uv8Offsets[v].x = Random.Range(minRange, maxRange);
                 uv8Offsets[v].y = Random.Range(minRange, maxRange);
 
-                newUvs[v].x += (uv7Offsets[v].x * comKey[0]);
-                newUvs[v].y += (uv7Offsets[v].y * comKey[1]);
-                newUvs[v].x += (uv7Offsets[v].x * comKey[2]);
-                newUvs[v].y += (uv7Offsets[v].y * comKey[3]);
+                newVertices[v] += normals[v] * (uv7Offsets[v].x * comKey[0]);
+                newVertices[v] += normals[v] * (uv7Offsets[v].y * comKey[1]);
+                newVertices[v] += normals[v] * (uv7Offsets[v].x * comKey[2]);
+                newVertices[v] += normals[v] * (uv7Offsets[v].y * comKey[3]);
 
-                newUvs[v].x += (uv8Offsets[v].y * comKey[4]);
-                newUvs[v].y += (uv8Offsets[v].x * comKey[5]);
-                newUvs[v].x += (uv8Offsets[v].y * comKey[6]);
-                newUvs[v].y += (uv8Offsets[v].x * comKey[7]);
+                newVertices[v] += normals[v] * (uv8Offsets[v].y * comKey[4]);
+                newVertices[v] += normals[v] * (uv8Offsets[v].x * comKey[5]);
+                newVertices[v] += normals[v] * (uv8Offsets[v].y * comKey[6]);
+                newVertices[v] += normals[v] * (uv8Offsets[v].x * comKey[7]);
 
-                newUvs[v] *= 0.1f;
-                /*newUvs[v] += normals[v] * (uv7Offsets[v].x * comKey[0]);
-                newUvs[v] += normals[v] * (uv7Offsets[v].y * comKey[1]);
-                newUvs[v] += normals[v] * (uv7Offsets[v].x * comKey[2]);
-                newUvs[v] += normals[v] * (uv7Offsets[v].y * comKey[3]);
-
-                newUvs[v] += normals[v] * (uv8Offsets[v].y * comKey[4]);
-                newUvs[v] += normals[v] * (uv8Offsets[v].x * comKey[5]);
-                newUvs[v] += normals[v] * (uv8Offsets[v].y * comKey[6]);
-                newUvs[v] += normals[v] * (uv8Offsets[v].x * comKey[7]);*/
+               // newVertices[v] *= 0.1f;
             }
 
             var existingMeshPath = AssetDatabase.GetAssetPath(mesh);
@@ -207,15 +197,13 @@ namespace GeoTetra.GTAvaCrypt
             var newMesh = new Mesh
             {
                 subMeshCount = mesh.subMeshCount,
-                //vertices = newVertices,
-                vertices = mesh.vertices,
+                vertices = newVertices,
                 colors = mesh.colors,
                 normals = mesh.normals,
                 tangents = mesh.tangents,
                 bindposes = mesh.bindposes,
                 boneWeights = mesh.boneWeights,
-                //uv = mesh.uv,
-                uv = newUvs,
+                uv = mesh.uv,
                 uv2 = mesh.uv2,
                 uv3 = mesh.uv3,
                 uv4 = mesh.uv4,
@@ -299,9 +287,9 @@ float _BitKey29;
 float _BitKey30;
 float _BitKey31;
 
-float2 modelDecode(float2 uv, float3 normal, float2 uv0, float2 uv1)
+float4 modelDecode(float4 vert, float3 normal, float2 uv0, float2 uv1)
 {
-    if (!_EnableAvaCrypt) return uv;
+    if (!_EnableAvaCrypt) return vert;
 
     // AvaCrypt Randomly Generated Begin
 ";
@@ -309,18 +297,17 @@ float2 modelDecode(float2 uv, float3 normal, float2 uv0, float2 uv1)
         const string ModelShaderDecodeSecond =
 @"  
     // AvaCrypt Randomly Generated End
-    uv.xy *= 10.0f;
-    uv.x -= (uv0.x * comKey0);
-    uv.y -= (uv0.y * comKey1);
-    uv.x -= (uv0.x * comKey2);
-    uv.y -= (uv0.y * comKey3);
+    vert.xyz -= normal * (uv0.x * comKey0);
+    vert.xyz -= normal * (uv0.y * comKey1);
+    vert.xyz -= normal * (uv0.x * comKey2);
+    vert.xyz -= normal * (uv0.y * comKey3);
 
-    uv.x -= (uv1.y * comKey4);
-    uv.y -= (uv1.x * comKey5);
-    uv.x -= (uv1.y * comKey6);
-    uv.y -= (uv1.x * comKey7);
-
-    return uv;
+    vert.xyz -= normal * (uv1.y * comKey4);
+    vert.xyz -= normal * (uv1.x * comKey5);
+    vert.xyz -= normal * (uv1.y * comKey6);
+    vert.xyz -= normal * (uv1.x * comKey7);
+    
+    return vert;
 }
 ";
     }

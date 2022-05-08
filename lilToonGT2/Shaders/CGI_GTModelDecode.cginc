@@ -41,38 +41,39 @@ float _BitKey29;
 float _BitKey30;
 float _BitKey31;
 
-float2 modelDecode(float2 uv, float3 normal, float2 uv0, float2 uv1)
+float4 modelDecode(float4 vert, float3 normal, float2 uv0, float2 uv1)
 {
-    if (!_EnableAvaCrypt) return uv;
+    if (!_EnableAvaCrypt) return vert;
 
     // AvaCrypt Randomly Generated Begin
-float decodeKey0 = (_BitKey0 + 0.3374381) * (_BitKey1 + 0.3893292) * (_BitKey2 + 0.9696795) * (_BitKey3 + 1.66946);
-float decodeKey1 = (_BitKey4 + 1.447287) * (_BitKey5 + 0.3701866) * (_BitKey6 + 0.5959519) * (_BitKey7 + 0.3314714);
-float decodeKey2 = (_BitKey8 + 0.08744645) * (_BitKey9 + 0.1273584) * (_BitKey10 + 1.610839) * (_BitKey11 + 0.7453853);
-float decodeKey3 = (_BitKey12 + 1.245067) * (_BitKey13 + 0.6881837) * (_BitKey14 + 0.91652) * (_BitKey15 + 1.355287);
-float decodeKey4 = (_BitKey16 + 0.512529) * (_BitKey17 + 1.354631) * (_BitKey18 + 1.358611) * (_BitKey19 + 0.2567139);
-float decodeKey5 = (_BitKey20 + 1.277374) * (_BitKey21 + 0.7269317) * (_BitKey22 + 0.5468479) * (_BitKey23 + 1.248418);
-float decodeKey6 = (_BitKey24 + 0.3516891) * (_BitKey25 + 1.045764) * (_BitKey26 + 1.814614) * (_BitKey27 + 0.09671926);
-float decodeKey7 = (_BitKey28 + 1.213774) * (_BitKey29 + 1.079363) * (_BitKey30 + 1.474131) * (_BitKey31 + 0.9118124);
-float comKey0 = sin(decodeKey2 - decodeKey0) * 1.407048 * cos(decodeKey3 + decodeKey5);
-float comKey1 = sin(decodeKey6 + decodeKey4) * 0.2337017 * cos(decodeKey1 - decodeKey0);
-float comKey2 = sin(decodeKey1 + decodeKey4) * 1.755225 * cos(decodeKey1 - decodeKey3);
-float comKey3 = sin(decodeKey6 + decodeKey0) * 1.256171 * cos(decodeKey3 - decodeKey5);
-float comKey4 = sin(decodeKey1 - decodeKey7) * 1.943389 * cos(decodeKey6 - decodeKey3);
-float comKey5 = sin(decodeKey5 + decodeKey2) * 1.997793 * cos(decodeKey0 - decodeKey7);
-float comKey6 = cos(decodeKey7 - decodeKey6) * 0.9228159 * sin(decodeKey4 - decodeKey2);
-float comKey7 = cos(decodeKey7 + decodeKey4) * 1.319906 * cos(decodeKey2 - decodeKey5);
+float decodeKey0 = (_BitKey0 + 1.665435) * (_BitKey1 + 0.9190379) * (_BitKey2 + 1.398461) * (_BitKey3 + 1.424742);
+float decodeKey1 = (_BitKey4 + 0.8068563) * (_BitKey5 + 0.7168342) * (_BitKey6 + 0.8849539) * (_BitKey7 + 0.4908149);
+float decodeKey2 = (_BitKey8 + 1.230231) * (_BitKey9 + 1.047104) * (_BitKey10 + 0.533821) * (_BitKey11 + 0.08608961);
+float decodeKey3 = (_BitKey12 + 0.7483009) * (_BitKey13 + 0.9510475) * (_BitKey14 + 1.186526) * (_BitKey15 + 0.2662108);
+float decodeKey4 = (_BitKey16 + 0.06635118) * (_BitKey17 + 0.3764012) * (_BitKey18 + 0.5143896) * (_BitKey19 + 0.3344367);
+float decodeKey5 = (_BitKey20 + 0.8106314) * (_BitKey21 + 1.632235) * (_BitKey22 + 1.350314) * (_BitKey23 + 1.945);
+float decodeKey6 = (_BitKey24 + 0.7287511) * (_BitKey25 + 0.7629718) * (_BitKey26 + 1.140175) * (_BitKey27 + 1.08026);
+float decodeKey7 = (_BitKey28 + 0.7416013) * (_BitKey29 + 1.251617) * (_BitKey30 + 0.0639627) * (_BitKey31 + 1.096068);
+float comKey0 = sin(decodeKey6 + decodeKey6) * 1.184541 * cos(decodeKey5 + decodeKey5);
+float comKey1 = sin(decodeKey7 + decodeKey4) * 0.7534689 * sin(decodeKey7 + decodeKey5);
+float comKey2 = cos(decodeKey1 - decodeKey3) * 0.8064076 * cos(decodeKey0 - decodeKey4);
+float comKey3 = cos(decodeKey0 - decodeKey6) * 0.005353212 * cos(decodeKey1 - decodeKey2);
+float comKey4 = sin(decodeKey1 - decodeKey3) * 1.297156 * sin(decodeKey4 + decodeKey7);
+float comKey5 = sin(decodeKey0 - decodeKey5) * 0.1962724 * sin(decodeKey1 + decodeKey2);
+float comKey6 = cos(decodeKey6 + decodeKey4) * 1.014071 * sin(decodeKey3 - decodeKey7);
+float comKey7 = sin(decodeKey2 - decodeKey0) * 1.928044 * sin(decodeKey3 + decodeKey2);
   
     // AvaCrypt Randomly Generated End
-    uv.x -= (uv0.x * comKey0);
-    uv.y -= (uv0.y * comKey1);
-    uv.x -= (uv0.x * comKey2);
-    uv.y -= (uv0.y * comKey3);
+   // vert.xyz *= 10.0;
+    vert.xyz -= normal * (uv0.x * comKey0);
+    vert.xyz -= normal * (uv0.y * comKey1);
+    vert.xyz -= normal * (uv0.x * comKey2);
+    vert.xyz -= normal * (uv0.y * comKey3);
 
-    uv.x -= (uv1.y * comKey4);
-    uv.y -= (uv1.x * comKey5);
-    uv.x -= (uv1.y * comKey6);
-    uv.y -= (uv1.x * comKey7);
-
-    return uv;
+    vert.xyz -= normal * (uv1.y * comKey4);
+    vert.xyz -= normal * (uv1.x * comKey5);
+    vert.xyz -= normal * (uv1.y * comKey6);
+    vert.xyz -= normal * (uv1.x * comKey7);
+    
+    return vert;
 }

@@ -138,7 +138,7 @@ namespace GeoTetra.GTAvaCrypt
                 sb1.AppendLine($"float comKey{i} = {firstSignStr}(decodeKey{_randomKeyIndex[i*DivideCount]} {firstAddStr} decodeKey{_randomKeyIndex[i*DivideCount+1]}) * {_randomDivideMultiplier[i]} * {secondSignStr}(decodeKey{_randomKeyIndex[i*DivideCount+2]} {secondAddStr} decodeKey{_randomKeyIndex[i*DivideCount+3]});");
             }
 
-            var searchResult = AssetDatabase.FindAssets("CGI_GTModelDecode");
+            var searchResult = AssetDatabase.FindAssets("CGI_GTModelDecode"); //liltoon
             if (searchResult.Length == 0)
             {
                 Debug.LogError("CGI_GTModelDecode.cginc not found!");
@@ -151,7 +151,20 @@ namespace GeoTetra.GTAvaCrypt
                     System.IO.File.WriteAllText(AssetDatabase.GUIDToAssetPath(sr), $"{ModelShaderDecodeFirst}{sb0.ToString()}{sb1.ToString()}{ModelShaderDecodeSecond}");
                 }
             }
-            
+
+            searchResult = AssetDatabase.FindAssets("CGI_GTModelDecodeUTS"); //uts
+            if (searchResult.Length == 0)
+            {
+                Debug.LogError("CGI_GTModelDecodeUTS.cginc not found!");
+            }
+            else
+            {
+                foreach (string sr in searchResult)
+                {
+                    Debug.Log($"Writing GTModelDecodeUTS {sr}");
+                    System.IO.File.WriteAllText(AssetDatabase.GUIDToAssetPath(sr), $"{ModelShaderDecodeFirst}{sb0.ToString()}{sb1.ToString()}{ModelShaderDecodeSecond}");
+                }
+            }
             float maxDistance = mesh.bounds.max.magnitude - mesh.bounds.min.magnitude;
 
             float minRange = maxDistance * -distortRatio;
